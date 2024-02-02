@@ -10,12 +10,29 @@ import tweetRoutes from "./routes/tweets.js";
 const app = express();
 dotenv.config();
 
+const allowCrossDomain = function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Content-Type, Authorization, access_token"
+	);
+
+	// intercept OPTIONS method
+	if ("OPTIONS" === req.method) {
+		res.send(200);
+	} else {
+		next();
+	}
+};
+app.use(allowCrossDomain);
+
 const connect = () => {
 	mongoose.set("strictQuery", false);
 	mongoose
 		.connect(process.env.MONGO)
 		.then(() => {
-			console.log("connect to mongodb database");
+			console.log("connected to mongodb database");
 		})
 		.catch((err) => {
 			throw err;
