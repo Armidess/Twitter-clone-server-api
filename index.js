@@ -45,7 +45,7 @@ app.use("/mindhive/api/users", userRoutes);
 app.use("/mindhive/api/auth", authRoutes);
 app.use("/mindhive/api/tweets", tweetRoutes);
 
-app.listen(4000, () => {
+app.listen(8000, () => {
 	connect();
-	console.log("Listening to port 4000");
+	console.log("Listening to port 8000");
 });
