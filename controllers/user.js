@@ -89,6 +89,7 @@ export const unFollow = async (req, res, next) => {
 };
 
 export const searchUser = async (req, res, next) => {
+	console.log(`Finding ${req.params.userName}`);
 	try {
 		const userName = req.params.userName;
 		const user = await User.find({ username: userName });
